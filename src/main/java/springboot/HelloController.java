@@ -1,16 +1,37 @@
 package springboot;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller   // Spring Boot项目的核心注解，主要目的是开启自动配置
+import springboot.entity.People;
+
+@RestController
 public class HelloController {
 	
-	@ResponseBody
+	@Value("${name}")
+	private String name;
+	
+	@Value("${message}")
+	private String message;
+	
+	@Autowired
+	private People people;
+	
 	@RequestMapping("/hello")
 	public String hello(){
-		return "hello world!";
+		return "hello "+this.name+" !";
+	}
+	
+	@RequestMapping("/message")
+	public String message(){
+		return this.message;
+	}
+	
+	@RequestMapping("/people")
+	public People people(){
+		return this.people;
 	}
 
 }

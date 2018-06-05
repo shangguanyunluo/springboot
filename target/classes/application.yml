@@ -1,2 +1,16 @@
 server:
-  port: 8083
+  port: 8080
+#  servlet:
+#    context-path: /springboot    #Context path of the application.
+#    path: /main            #Path of the main dispatcher servlet.
+
+
+
+#自定义属性的使用举例
+name: zhangsan
+
+message: my friend's name is ${name}
+
+people: 
+  name: ${name}
+  age: 27
