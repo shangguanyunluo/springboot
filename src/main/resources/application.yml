@@ -5,6 +5,10 @@ server:
 #    path: /main            #Path of the main dispatcher servlet.
 
 
+#静态资源配置
+spring:
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
 
 #自定义属性的使用举例
 name: zhangsan
