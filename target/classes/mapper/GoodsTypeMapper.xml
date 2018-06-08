@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springboot.mapper.GoodsTypeMapper">
+
+	<sql id="Base_Column_List">
+		TYPE_ID, TYPE_NAME, CREATE_TIME, UPDATE_TIME
+	</sql>
+
+	<resultMap id="BaseResultMap" type="springboot.entity.GoodsType">
+		<id column="TYPE_ID" jdbcType="VARCHAR" property="typeId" />
+		<result column="TYPE_NAME" jdbcType="VARCHAR" property="typeName" />
+		<result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+	</resultMap>
+
+	<!-- 添加一个商品类型 -->
+	<insert id="saveGoodsType" parameterType="springboot.entity.GoodsType">
+		insert into goods_type
+		(TYPE_ID, TYPE_NAME, CREATE_TIME)
+		values (replace(UUID(),'-',''),
+		#{typeName,jdbcType=VARCHAR}, NOW())
+	</insert>
+
+	<!-- 删除一个商品类型 -->
+	<delete id="deleteGoodsType" parameterType="java.lang.String">
+		delete from
+		goods_type
+		where TYPE_ID = #{typeId,jdbcType=VARCHAR}
+	</delete>
+
+	<!-- 修改一个商品类型 -->
+	<update id="updateGoodsType" parameterType="springboot.entity.GoodsType">
+		update goods_type
+		set
+		TYPE_NAME = #{typeName,jdbcType=VARCHAR},
+		UPDATE_TIME = NOW()
+		where
+		TYPE_ID = #{typeId,jdbcType=VARCHAR}
+	</update>
+
+	<!-- 获取所有的商品类型 -->
+	<select id="getList" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from goods_type
+		order by CREATE_TIME ASC
+	</select>
+
+	<!-- 依据商品名称查询 -->
+	<select id="getByTypeName" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from goods_type
+		where TYPE_NAME = #{typeName,jdbcType=VARCHAR}
+	</select>
+
+</mapper>

@@ -18,3 +18,13 @@ message: my friend's name is ${name}
 people: 
   name: ${name}
   age: 27
+  
+  
+  
+mybatis:
+  # mybatis配置文件
+  config-location: classpath:mybatis-config.xml
+  # 映射文件所在路径
+  mapper-locations:
+  # 前面的 - 不要删除
+    - classpath:mapper/*.xml
