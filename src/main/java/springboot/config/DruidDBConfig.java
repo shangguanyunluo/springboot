@@ -6,6 +6,7 @@ import javax.sql.DataSource;
 
 import org.jboss.logging.Logger;
 import org.jboss.logging.Logger.Level;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 
 @Configuration
 @PropertySource(value = { "classpath:jdbc.properties" })
+@MapperScan("springboot.mapper")
 public class DruidDBConfig {
 	private Logger logger = Logger.getLogger(DruidDBConfig.class);
 
